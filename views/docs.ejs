@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprehensive Documentation | BookFinder Pro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .glass-panel { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        /* Professional base font sizing */
+        body { background-color: #0f172a; color: #cbd5e1; font-size: 1.2rem; line-height: 1.7; }
+        .step-line { position: relative; }
+        .step-line::before { content: ''; position: absolute; left: 19px; top: 40px; bottom: 0; width: 2px; background: rgba(129, 140, 248, 0.3); }
+        h1, h2, h3 { color: white; tracking: -0.02em; }
+    </style>
+</head>
+<body class="flex flex-col min-h-full">
+
+    <nav class="sticky top-0 z-[100] glass-panel py-6 px-8 border-b border-white/10">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="/" class="text-xl font-bold text-indigo-400 hover:text-white transition-colors">← Back to App</a>
+            <span class="text-indigo-400 font-bold tracking-widest text-sm uppercase">OLIPT1 Project Documentation</span>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-8 py-16 max-w-5xl">
+        <header class="mb-20">
+            <h1 class="text-7xl font-black mb-6 tracking-tighter italic">System Architecture</h1>
+            <p class="text-slate-400 text-2xl">A professional technical breakdown of the BookFinder Pro integration project by <span class="text-indigo-400 font-bold">Joseph Amandy</span>.</p>
+        </header>
+
+        <section class="glass-panel rounded-[2rem] p-12 mb-12">
+            <h2 class="text-3xl font-bold text-indigo-400 mb-10 uppercase tracking-widest">1. Technology Stack</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <a href="https://nodejs.org/en/docs/" target="_blank" class="flex items-center gap-6 bg-white/5 p-6 rounded-3xl border border-white/5 hover:bg-white/10 transition-all group">
+                    <div class="w-16 h-16 rounded-2xl bg-blue-500/20 flex items-center justify-center text-blue-400 font-black text-xl">JS</div>
+                    <div><p class="text-white text-xl font-bold group-hover:text-blue-400">Node.js</p><p class="text-sm opacity-60 uppercase tracking-widest">Runtime Environment</p></div>
+                </a>
+                <a href="https://expressjs.com/en/4x/api.html" target="_blank" class="flex items-center gap-6 bg-white/5 p-6 rounded-3xl border border-white/5 hover:bg-white/10 transition-all group">
+                    <div class="w-16 h-16 rounded-2xl bg-green-500/20 flex items-center justify-center text-green-400 font-black text-xl">EX</div>
+                    <div><p class="text-white text-xl font-bold group-hover:text-green-400">Express.js</p><p class="text-sm opacity-60 uppercase tracking-widest">Backend Framework</p></div>
+                </a>
+                <a href="https://ejs.co/#docs" target="_blank" class="flex items-center gap-6 bg-white/5 p-6 rounded-3xl border border-white/5 hover:bg-white/10 transition-all group">
+                    <div class="w-16 h-16 rounded-2xl bg-yellow-500/20 flex items-center justify-center text-yellow-400 font-black text-xl">EJS</div>
+                    <div><p class="text-white text-xl font-bold group-hover:text-yellow-400">Templating Engine</p><p class="text-sm opacity-60 uppercase tracking-widest">UI Generation</p></div>
+                </a>
+                <a href="https://tailwindcss.com/docs" target="_blank" class="flex items-center gap-6 bg-white/5 p-6 rounded-3xl border border-white/5 hover:bg-white/10 transition-all group">
+                    <div class="w-16 h-16 rounded-2xl bg-cyan-500/20 flex items-center justify-center text-cyan-400 font-black text-xl">TW</div>
+                    <div><p class="text-white text-xl font-bold group-hover:text-cyan-400">Tailwind CSS</p><p class="text-sm opacity-60 uppercase tracking-widest">Styling Engine</p></div>
+                </a>
+            </div>
+        </section>
+
+        <section class="glass-panel rounded-[2rem] p-12 mb-12 border-l-[12px] border-indigo-500">
+            <h2 class="text-3xl font-bold text-indigo-400 mb-10 uppercase tracking-widest">2. API Acquisition Guide</h2>
+            <p class="mb-10 text-xl opacity-80 leading-relaxed">Securing the connection to the Google infrastructure involved a structured 3-step authentication setup.</p>
+            
+            <div class="space-y-8">
+                <div class="bg-white/5 p-8 rounded-3xl border border-white/10">
+                    <h3 class="text-indigo-300 font-bold text-2xl mb-3">Step 1: Project Creation</h3>
+                    <p class="opacity-80">Registration of the application on the <a href="https://console.cloud.google.com/" target="_blank" class="text-indigo-400 font-bold underline">Google Cloud Console</a> to generate a unique Project Identity.</p>
+                </div>
+                <div class="bg-white/5 p-8 rounded-3xl border border-white/10">
+                    <h3 class="text-indigo-300 font-bold text-2xl mb-3">Step 2: Library Activation</h3>
+                    <p class="opacity-80">Searching and enabling the <a href="https://developers.google.com/books/v1/getting_started" target="_blank" class="text-indigo-400 font-bold underline">Google Books API</a> within the Cloud Library to authorize external data calls.</p>
+                </div>
+                <div class="bg-white/5 p-8 rounded-3xl border border-white/10">
+                    <h3 class="text-indigo-300 font-bold text-2xl mb-3">Step 3: Credential Security</h3>
+                    <p class="opacity-80">Generation of the API Key and its subsequent storage in a local <a href="https://www.npmjs.com/package/dotenv" target="_blank" class="text-indigo-400 font-bold underline">Environment Variable (.env)</a> to prevent source code exposure.</p>
+                </div>
+            </div>
+            
+        </section>
+
+        <section class="glass-panel rounded-[2rem] p-12 mb-12">
+            <h2 class="text-3xl font-bold text-indigo-400 mb-12 uppercase tracking-widest">3. Development Roadmap</h2>
+            
+            <div class="space-y-16">
+                <div class="step-line flex gap-10">
+                    <div class="z-10 w-12 h-12 rounded-full bg-indigo-600 flex-shrink-0 flex items-center justify-center text-white font-black shadow-[0_0_30px_rgba(79,70,229,0.7)] text-xl">1</div>
+                    <div>
+                        <h3 class="font-bold text-3xl">Initialization</h3>
+                        <p class="opacity-70 mt-3 text-lg">Setting up the Node.js project structure, installing dependencies, and configuring the Middleware for JSON parsing and static file serving.</p>
+                    </div>
+                </div>
+
+                <div class="step-line flex gap-10">
+                    <div class="z-10 w-12 h-12 rounded-full bg-indigo-600 flex-shrink-0 flex items-center justify-center text-white font-black shadow-[0_0_30px_rgba(79,70,229,0.7)] text-xl">2</div>
+                    <div>
+                        <h3 class="font-bold text-3xl">API Engineering</h3>
+                        <p class="opacity-70 mt-3 text-lg">Developing the <a href="https://axios-http.com/docs/intro" target="_blank" class="text-indigo-400 font-bold underline">Axios-driven</a> fetch logic and implementing <code>Promise.all</code> to handle multi-genre data streams in parallel.</p>
+                    </div>
+                </div>
+
+                <div class="flex gap-10">
+                    <div class="z-10 w-12 h-12 rounded-full bg-indigo-600 flex-shrink-0 flex items-center justify-center text-white font-black shadow-[0_0_30px_rgba(79,70,229,0.7)] text-xl">3</div>
+                    <div>
+                        <h3 class="font-bold text-3xl">UI/UX Glassmorphism</h3>
+                        <p class="opacity-70 mt-3 text-lg">Designing the interface using <a href="https://tailwindcss.com/docs/backdrop-blur" target="_blank" class="text-indigo-400 font-bold underline">Backdrop Blur</a> and sticky positioning to create a high-performance modern web aesthetic.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="glass-panel rounded-[2rem] p-12 mb-12">
+            <h2 class="text-3xl font-bold text-indigo-400 mb-10 uppercase tracking-widest">4. Data Flow Architecture</h2>
+            
+            
+            
+            <div class="grid grid-cols-1 gap-10 mt-12">
+                <div class="flex flex-col md:flex-row gap-8 items-start">
+                    <div class="w-full md:w-1/3 bg-indigo-500/20 p-6 rounded-3xl border border-indigo-500/40 text-center font-black uppercase text-sm tracking-tighter">I. Trigger Layer</div>
+                    <div class="flex-grow text-lg opacity-80">User interaction initiates a JavaScript <strong>Debounce</strong> function, capturing the input and waiting 300ms before dispatching the request to the server.</div>
+                </div>
+                <div class="flex flex-col md:flex-row gap-8 items-start">
+                    <div class="w-full md:w-1/3 bg-purple-500/20 p-6 rounded-3xl border border-purple-500/40 text-center font-black uppercase text-sm tracking-tighter">II. Processing Layer</div>
+                    <div class="flex-grow text-lg opacity-80">The <strong>Express Controller</strong> matches the route, injects the secret API key from the environment, and creates a secure Axios request.</div>
+                </div>
+                <div class="flex flex-col md:flex-row gap-8 items-start">
+                    <div class="w-full md:w-1/3 bg-pink-500/20 p-6 rounded-3xl border border-pink-500/40 text-center font-black uppercase text-sm tracking-tighter">III. Integration Layer</div>
+                    <div class="flex-grow text-lg opacity-80">The <strong>Google Books API</strong> validates the credentials, queries the global library, and returns a high-fidelity JSON data packet to our backend.</div>
+                </div>
+                <div class="flex flex-col md:flex-row gap-8 items-start">
+                    <div class="w-full md:w-1/3 bg-green-500/20 p-6 rounded-3xl border border-green-500/40 text-center font-black uppercase text-sm tracking-tighter">IV. Presentation Layer</div>
+                    <div class="flex-grow text-lg opacity-80">The server injects the JSON data into the <strong>EJS Template</strong>, renders the finalized HTML, and serves the visual result to the client browser.</div>
+                </div>
+            </div>
+
+            
+        </section>
+
+        <section class="glass-panel rounded-[2rem] p-12">
+            <h2 class="text-3xl font-bold text-indigo-400 mb-8 uppercase tracking-widest">5. Setup & Execution</h2>
+            <pre class="bg-black/50 p-10 rounded-3xl text-sm font-mono overflow-x-auto text-indigo-300 leading-loose">
+# 1. Dependency Installation
+npm install express axios ejs dotenv
+
+# 2. Environment Setup
+# Create .env and provide your API Key
+GOOGLE_BOOKS_API_KEY=YOUR_SECURE_KEY_HERE
+
+# 3. System Startup
+node server.js
+            </pre>
+        </section>
+    </main>
+
+    <footer class="py-20 text-center opacity-40 text-lg font-medium">
+        &copy; 2026 Joseph Amandy | OLIPT1 Integrative Programming Project
+    </footer>
+
+</body>
+</html>
