@@ -4,7 +4,7 @@ const axios = require('axios');
 const app = express();
 
 // --- CONFIGURATION ---
-// Render provides the PORT dynamically. Using process.env.PORT is mandatory.
+// Using process.env.PORT is mandatory for Render deployment
 const PORT = process.env.PORT || 3000;
 const API_KEY = process.env.GOOGLE_BOOKS_API_KEY;
 
@@ -15,13 +15,15 @@ app.use(express.static('public'));
 /**
  * HOME ROUTE
  * Fetches multiple genres in parallel.
- * Added error checking for the API_KEY to prevent silent failures on Render.
  */
 app.get('/', async (req, res) => {
+    // Safety check for Render Environment Variables
     if (!API_KEY) {
+        console.error("CRITICAL: GOOGLE_BOOKS_API_KEY is missing!");
         return res.render('index', { 
-            genreData: {}, books: [], 
-            error: "API Key is missing in Environment Variables.", 
+            genreData: {}, 
+            books: null, 
+            error: "API Key is missing. Please check Render Environment Variables.", 
             isHomePage: true 
         });
     }
@@ -30,7 +32,7 @@ app.get('/', async (req, res) => {
     const genreData = {};
 
     try {
-        // Parallel execution using Promise.all for high performance
+        // Parallel execution for high performance
         await Promise.all(genres.map(async (genre) => {
             const url = `https://www.googleapis.com/books/v1/volumes?q=subject:${genre}&maxResults=4&key=${API_KEY}`;
             const response = await axios.get(url, { timeout: 4000 });
@@ -44,8 +46,13 @@ app.get('/', async (req, res) => {
             isHomePage: true 
         });
     } catch (error) {
-        console.error("Home Page Error:", error.message);
-        res.render('index', { genreData: {}, books: [], error: "Failed to load featured books.", isHomePage: true });
+        console.error("Home Page API Error:", error.message);
+        res.render('index', { 
+            genreData: {}, 
+            books: null, 
+            error: "Failed to load featured books. Please try again later.", 
+            isHomePage: true 
+        });
     }
 });
 
@@ -66,13 +73,21 @@ app.post('/search', async (req, res) => {
         const books = response.data.items || [];
         
         if (books.length === 0) {
-            return res.render('index', { books: [], error: `No results found for "${bookName}".`, isHomePage: false });
+            return res.render('index', { 
+                books: [], 
+                error: `No results found for "${bookName}".`, 
+                isHomePage: false 
+            });
         }
         
         res.render('index', { books: books, error: null, isHomePage: false });
     } catch (error) {
         console.error("Search Error:", error.message);
-        res.render('index', { books: null, error: "The search service is currently unavailable.", isHomePage: false });
+        res.render('index', { 
+            books: null, 
+            error: "The search service is currently unavailable.", 
+            isHomePage: false 
+        });
     }
 });
 
@@ -95,6 +110,7 @@ app.get('/api/suggestions', async (req, res) => {
         }));
         res.json(suggestions);
     } catch (error) {
+        console.error("Suggestion API Error:", error.message);
         res.status(500).json([]);
     }
 });
@@ -108,7 +124,6 @@ app.get('/docs', (req, res) => {
 
 /**
  * 404 CATCH-ALL
- * Professionally handle pages that don't exist
  */
 app.use((req, res) => {
     res.status(404).send("Page not found. Use the Navigation to return home.");
@@ -118,9 +133,9 @@ app.use((req, res) => {
 app.listen(PORT, () => {
     console.log(`
     ========================================
-    🚀 LIVE ON RENDER: http://localhost:${PORT}
-    📂 PROJECT: BookFinder Pro (OLIPT1)
-    👤 DEVELOPER: Joseph Amandy
+    LIVE ON RENDER: http://localhost:${PORT}
+    PROJECT: BookFinder Pro (OLIPT1)
+    DEVELOPER: Joseph Amandy
     ========================================
     `);
 });

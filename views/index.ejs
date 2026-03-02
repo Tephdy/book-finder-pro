@@ -50,10 +50,12 @@
             transform: translateY(-5px);
         }
 
+        /* Fixed Suggestions Box Z-Index and Opacity */
         #suggestions-box {
-            background: rgba(15, 23, 42, 0.95);
+            background: rgba(15, 23, 42, 0.98); 
             backdrop-filter: blur(20px);
             z-index: 9999 !important;
+            pointer-events: auto;
         }
 
         .bg-blob {
@@ -87,7 +89,7 @@
 
     <main class="container mx-auto px-4 py-12">
         
-        <section class="max-w-3xl mx-auto mb-16 relative">
+        <section class="max-w-3xl mx-auto mb-16 relative z-50">
             <div class="glass-card rounded-3xl p-8 md:p-12 shadow-2xl">
                 <h2 class="text-3xl font-extrabold text-center mb-8 text-white tracking-tight text-balance">Discover your next favorite story.</h2>
                 <form action="/search" method="POST" class="flex flex-col sm:flex-row gap-4 relative">
@@ -204,19 +206,23 @@
                         const data = await res.json();
                         if (data && data.length > 0) {
                             suggestionsBox.innerHTML = data.map(book => `
-                                <a href="${book.link}" target="_blank" class="block px-6 py-4 hover:bg-white/5 border-b border-white/5 last:border-0 transition-all">
+                                <a href="${book.link}" target="_blank" class="block px-6 py-4 hover:bg-white/10 border-b border-white/5 last:border-0 transition-all">
                                     <p class="text-sm font-bold text-white truncate">${book.title}</p>
                                     <p class="text-[10px] text-slate-500 uppercase font-black mt-1">${book.author}</p>
                                 </a>
                             `).join('');
                             suggestionsBox.classList.remove('hidden');
+                        } else {
+                            suggestionsBox.classList.add('hidden');
                         }
                     } catch (err) { console.error(err); }
                 }, 300);
             });
 
             document.addEventListener('click', (e) => {
-                if (!searchInput.contains(e.target)) suggestionsBox.classList.add('hidden');
+                if (!searchInput.contains(e.target) && !suggestionsBox.contains(e.target)) {
+                    suggestionsBox.classList.add('hidden');
+                }
             });
         });
     </script>
